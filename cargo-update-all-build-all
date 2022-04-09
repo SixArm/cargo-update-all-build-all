@@ -1,0 +1,18 @@
+#!/bin/sh
+set -euf
+
+# Use Rust cargo to update all packages and build all packages.
+#
+# Tracking:
+#
+#   * Package: cargo-update-all-build-all
+#   * Version: 1.0.0
+#   * Created: 2022-04-09T18:44:29Z
+#   * Updated: 2022-04-09T18:44:29Z
+#   * License: GPL-2.0 or contact us for custom license
+#   * Contact: Joel Parker Henderson (joel@sixarm.com)
+
+find "${DIR:-$PWD}" -type f -name Cargo.toml \
+-exec printf %s\\n {} \; \
+-exec "${CARGO:-cargo}" update --aggressive --manifest-path {} \; \
+-exec "${CARGO:-cargo}" build --all-targets --manifest-path {} \;
